@@ -20,7 +20,7 @@ export default function Index(probs) {
     );
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
     const res = await fetch(`${process.env.PRODUCTS_URL}/products`);
     const data = await res.json();
     return {

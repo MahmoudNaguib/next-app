@@ -1,7 +1,13 @@
 import Head from "next/head";
 import Link from "next/link";
-
-export default function Index(probs) {
+import useSWR from 'swr';
+import Loader from "../../components/loader";
+import fetcher from "../../libs/fetcher";
+import Failed from "../../components/failed";
+export default function Index() {
+    const { data, error } = useSWR(`${process.env.NEXT_PUBLIC_POSTS_URL}/posts?_limit=10`, fetcher);
+    if (error) return (<Failed />)
+    if (!data) return (<Loader />)
     return (
         <div>
             <Head>
@@ -10,7 +16,7 @@ export default function Index(probs) {
             </Head>
             <h1>Posts page</h1>
             <ul>
-                {probs.rows.map(row => (
+                {data.map(row => (
                     <li key={row.id}>
                         <Link href={`/posts/${row.id}`}>{row.title}</Link>
                     </li>
@@ -18,14 +24,4 @@ export default function Index(probs) {
             </ul>
         </div>
     );
-}
-
-export async function getStaticProps() {
-    const res = await fetch(`${process.env.POSTS_URL}/posts?_limit=10`);
-    const data = await res.json();
-    return {
-        props: {
-            rows: data
-        }
-    }
 }
