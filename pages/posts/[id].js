@@ -13,7 +13,7 @@ export default function Details(props){
     );
 }
 export async function getServerSideProps(ctx){
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${ctx.params.id}`);
+    const res = await fetch(`${process.env.POSTS_URL}/posts/${ctx.params.id}`);
     const data = await res.json();
     return {
         props: {

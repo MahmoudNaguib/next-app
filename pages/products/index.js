@@ -5,14 +5,14 @@ export default function Index(probs) {
     return (
         <div>
             <Head>
-                <title>Posts page</title>
-                <meta name="description" content="Posts page content"></meta>
+                <title>Products page</title>
+                <meta name="description" content="Products page content"></meta>
             </Head>
-            <h1>Posts page</h1>
+            <h1>Products page</h1>
             <ul>
                 {probs.rows.map(row => (
                     <li key={row.id}>
-                        <Link href={`/posts/${row.id}`}>{row.title}</Link>
+                        <Link href={`/products/${row.id}`}>{row.title}</Link>
                     </li>
                 ))}
             </ul>
@@ -21,7 +21,7 @@ export default function Index(probs) {
 }
 
 export async function getStaticProps() {
-    const res = await fetch(`${process.env.POSTS_URL}/posts?_limit=10`);
+    const res = await fetch(`${process.env.PRODUCTS_URL}/products`);
     const data = await res.json();
     return {
         props: {
