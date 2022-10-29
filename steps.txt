@@ -1,0 +1,9 @@
+- In react
+    - npx create-react-app <appName>
+- In Next
+    - npx create-next-app <appName>
+
+
+  "dev": "[ -e .env ] && set -a && . ./.env; next dev",
+    "build": "[ -e .env ] && set -a && . ./.env; next build",
+    "start": "[ -e .env ] && set -a && . ./.env; next
